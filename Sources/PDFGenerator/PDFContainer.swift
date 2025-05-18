@@ -10,7 +10,8 @@ import UIKit
 
 extension PDF {
     
-    open class Container {
+    open
+    class Container {
         public weak
         var parent: Container?
         
@@ -81,7 +82,7 @@ extension PDF {
             //Override this method & draw the contents
         }
         
-        public
+        open
         func fixContentBounds(in environment: PDF.Environment) {
             if let parent {
                 parent.fixContentBounds(in: environment)
@@ -118,7 +119,8 @@ extension PDF {
 }
 
 extension PDF.Container {
-    public struct Anchors: OptionSet, Sendable {
+    public
+    struct Anchors: OptionSet, Sendable {
         public let rawValue: Int
         static let top = Anchors(rawValue: 1 << 0)
         static let bottom = Anchors(rawValue: 1 << 1)
@@ -130,7 +132,8 @@ extension PDF.Container {
         }
     }
     
-    public struct Borders: OptionSet, Sendable {
+    public
+    struct Borders: OptionSet, Sendable {
         public let rawValue: Int
         static let top = Borders(rawValue: 1 << 0)
         static let bottom = Borders(rawValue: 1 << 1)
@@ -144,7 +147,8 @@ extension PDF.Container {
         }
     }
     
-    public class Layout {
+    public
+    struct Layout {
         let container: PDF.Container
         var anchors: Anchors = []
         var borders: Borders = []

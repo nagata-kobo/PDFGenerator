@@ -12,7 +12,8 @@ extension PDF {
 
     open class Table: Stack {
         
-        public override init(direction: PDF.Stack.Direction = .vertical, size: PDF.Dimension.Size) {
+        public override
+        init(direction: PDF.Stack.Direction = .vertical, size: PDF.Dimension.Size) {
             super.init(direction: direction, size: size)
         }
         
@@ -35,7 +36,7 @@ extension PDF {
 
 extension PDF.Table {
 
-    public
+    open
     class Row: PDF.Table {
         
         public
@@ -46,7 +47,7 @@ extension PDF.Table {
         }
     }
     
-    public
+    open
     class Column: PDF.Table {
         
         public

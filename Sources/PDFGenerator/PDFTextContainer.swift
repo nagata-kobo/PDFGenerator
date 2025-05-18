@@ -10,7 +10,8 @@ import UIKit
 
 extension PDF {
     
-    public class TextContainer: Container {
+    open
+    class TextContainer: Container {
         
         public enum VerticalAlignment {
             case top

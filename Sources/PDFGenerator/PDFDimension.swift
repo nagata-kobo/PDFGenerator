@@ -39,12 +39,14 @@ extension PDF.Dimension {
         }
     }
     
+    /*
     enum PDFContainer {
         case container
         case page
         case column
         case row
     }
+     */
     
     public struct Size: Sendable {
         var width: Length

@@ -10,22 +10,29 @@ import UIKit
 
 extension PDF {
     
-    public class Environment {
+    public final
+    class Environment {
         
-        public enum WritingDirection {
+        public
+        enum WritingDirection {
             case leftToRight
             case rightToLeft
         }
         
-        private var pageSize: PDF.Dimension.Size
+        private
+        var pageSize: PDF.Dimension.Size
         
-        private(set) public var dpi: CGFloat = 72
+        private(set) public
+        var dpi: CGFloat = 72
         
-        private(set) public var currentPage: PDF.Page? = nil
+        private(set) public
+        var currentPage: PDF.Page? = nil
         
-        private var writingDirection: WritingDirection = .leftToRight
+        private
+        var writingDirection: WritingDirection = .leftToRight
         
-        public var leftAnchor: Container.Anchors {
+        public
+        var leftAnchor: Container.Anchors {
             if writingDirection == .leftToRight {
                 return .leading
             } else {
@@ -33,7 +40,8 @@ extension PDF {
             }
         }
         
-        public var rightAnchor: Container.Anchors {
+        public
+        var rightAnchor: Container.Anchors {
             if writingDirection == .leftToRight {
                 return .trailing
             } else {
@@ -41,17 +49,21 @@ extension PDF {
             }
         }
 
-        private var containerPath: [Container] = []
+        private
+        var containerPath: [Container] = []
         
-        public init(pageSize: PDF.Dimension.Size) {
+        public
+        init(pageSize: PDF.Dimension.Size) {
             self.pageSize = pageSize
         }
         
+        public
         var contentBounds: CGRect {
             pageSize.bounds(dpi: dpi)
         }
         
-        public func createPDFData(for pages: [PDF.Page]) -> Data {
+        public
+        func createPDFData(for pages: [PDF.Page]) -> Data {
             let format = UIGraphicsPDFRendererFormat()
             let bounds = pageSize.bounds(dpi: dpi)
             print(bounds)

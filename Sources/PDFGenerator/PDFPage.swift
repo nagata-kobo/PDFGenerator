@@ -10,7 +10,8 @@ import UIKit
 
 extension PDF {
     
-    public class Page: Container {
+    public
+    class Page: Container {
         
         var content: Container
         
@@ -18,7 +19,8 @@ extension PDF {
             return content as! PDF.Stack
         }
         
-        public init(
+        public
+        init(
             size: PDF.Dimension.Size = .parentContentSize,
             leftPadding: PDF.Dimension.Length = .absolute(.point(0)),
             rightPadding: PDF.Dimension.Length = .absolute(.point(0)),

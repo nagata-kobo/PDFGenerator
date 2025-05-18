@@ -29,6 +29,7 @@ extension PDF {
             super.init(size: size)
         }
         
+        public
         func add(
             _ content: PDF.Container,
             borders: PDF.Container.Borders = [],
@@ -58,6 +59,7 @@ extension PDF {
             contentLayouts.append(layout)
         }
         
+        public
         func fill(
             _ content: PDF.Container,
             borders: PDF.Container.Borders = []

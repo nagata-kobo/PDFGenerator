@@ -49,6 +49,11 @@ extension PDF.Dimension {
     public struct Size: Sendable {
         var width: Length
         var height: Length
+        
+        public init(width: Length, height: Length) {
+            self.width = width
+            self.height = height
+        }
     }
 }
 

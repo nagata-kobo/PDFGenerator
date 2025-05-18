@@ -14,7 +14,7 @@ extension PDF {
         
         var content: Container
         
-        var pageContent: PDF.Stack {
+        public var pageContent: PDF.Stack {
             return content as! PDF.Stack
         }
         

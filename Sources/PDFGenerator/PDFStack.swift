@@ -10,7 +10,7 @@ import UIKit
 
 extension PDF {
     
-    public class Stack: Container {
+    open class Stack: Container {
         
         public enum Direction {
             case vertical

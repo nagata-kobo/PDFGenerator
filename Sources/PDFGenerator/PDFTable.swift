@@ -10,7 +10,7 @@ import PDFKit
 
 extension PDF {
 
-    public class Table: Stack {
+    open class Table: Stack {
         
         public override init(direction: PDF.Stack.Direction = .vertical, size: PDF.Dimension.Size) {
             super.init(direction: direction, size: size)

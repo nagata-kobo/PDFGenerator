@@ -10,7 +10,7 @@ import UIKit
 
 extension PDF {
     
-    public class Container {
+    open class Container {
         public weak
         var parent: Container?
         

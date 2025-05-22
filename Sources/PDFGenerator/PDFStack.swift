@@ -22,6 +22,8 @@ extension PDF {
         
         var contentLayouts: [PDF.Container.Layout] = []
         
+        private let borderColor: UIColor = .black
+        
         init(
             direction: Direction = .vertical,
             size: Dimension.Size
@@ -94,6 +96,7 @@ extension PDF {
                         context.fill(bounds)
                     }
                     if layout.borders == .all {
+                        borderColor.setStroke()
                         context.stroke(bounds)
                     }
                 }

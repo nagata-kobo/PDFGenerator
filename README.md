@@ -56,3 +56,4 @@ Intended to work with PDFKit.
     }
 ```
 
+Sample code: https://github.com/nagata-kobo/PDFCreator.git

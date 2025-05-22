@@ -89,14 +89,12 @@ extension PDF {
             for layout in contentLayouts {
                 let content = layout.container
                 if let bounds = content.bounds {
-                    var backgroundBounds = bounds
-                    if layout.borders == .all {
-                        context.stroke(bounds)
-                        backgroundBounds = bounds.insetBy(dx: 1, dy: 1)
-                    }
                     if let backgroundColor = layout.backgroundColor {
                         backgroundColor.setFill()
-                        context.fill(backgroundBounds)
+                        context.fill(bounds)
+                    }
+                    if layout.borders == .all {
+                        context.stroke(bounds)
                     }
                 }
                 environment.push(content)

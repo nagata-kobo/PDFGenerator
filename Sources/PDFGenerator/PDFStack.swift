@@ -85,18 +85,18 @@ extension PDF {
         ) {
             fixContentBounds(in: environment)
             guard let contentBounds else {return}
-            print("***S", contentBounds)
+            //print("***S", contentBounds)
             for layout in contentLayouts {
                 let content = layout.container
-                if let backgroundColor = layout.backgroundColor {
-                    backgroundColor.setFill()
-                    if let bounds = content.bounds {
-                        context.fill(bounds)
-                    }
-                }
-                if layout.borders == .all {
-                    if let bounds = content.bounds {
+                if let bounds = content.bounds {
+                    var backgroundBounds = bounds
+                    if layout.borders == .all {
                         context.stroke(bounds)
+                        backgroundBounds = bounds.insetBy(dx: 1, dy: 1)
+                    }
+                    if let backgroundColor = layout.backgroundColor {
+                        backgroundColor.setFill()
+                        context.fill(backgroundBounds)
                     }
                 }
                 environment.push(content)

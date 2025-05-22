@@ -20,16 +20,27 @@ extension PDF {
         public
         func add(
             _ content: PDF.Container,
+            backgroundColor: UIColor? = nil,
             fromEnd: Bool = false
         ) {
-            super.add(content, borders: .all, fromEnd: fromEnd)
+            super.add(
+                content,
+                borders: .all,
+                backgroundColor: backgroundColor,
+                fromEnd: fromEnd
+            )
         }
         
         public
         func fill(
-            _ content: PDF.Container
+            _ content: PDF.Container,
+            backgroundColor: UIColor? = nil
         ) {
-            super.fill(content, borders: .all)
+            super.fill(
+                content,
+                borders: .all,
+                backgroundColor: backgroundColor
+            )
         }
     }
 }

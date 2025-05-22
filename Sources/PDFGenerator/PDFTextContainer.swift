@@ -75,7 +75,9 @@ extension PDF {
                     attributedText: attributedText,
                     in: contentBounds
                 )
-                attributedText.draw(in: textBounds)
+                let text = attributedText.mutableCopy() as! NSMutableAttributedString
+                text.addAttribute(.paragraphStyle, value: createParagraphStyle(), range: NSRange(location: 0, length: text.length))
+                text.draw(in: textBounds)
                 return
             }
             let font = self.font ?? UIFont.systemFont(ofSize: 150)

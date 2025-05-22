@@ -23,6 +23,8 @@ extension PDF {
         
         public var font: UIFont?
         
+        public var color: UIColor?
+        
         public var attributedText: NSAttributedString?
         
         public var alignment: NSTextAlignment?
@@ -48,12 +50,14 @@ extension PDF {
         public init(
             _ text: String,
             font: UIFont,
+            color: UIColor? = nil,
             alignment: NSTextAlignment?,
             verticalAlignment: VerticalAlignment = .middle,
             size: PDF.Dimension.Size = .zero
         ) {
             self.text = text
             self.font = font
+            self.color = color
             self.alignment = alignment
             self.verticalAlignment = verticalAlignment
             super.init(size: size)
@@ -75,10 +79,13 @@ extension PDF {
                 return
             }
             let font = self.font ?? UIFont.systemFont(ofSize: 150)
-            let attributes: [NSAttributedString.Key : Any] = [
+            var attributes: [NSAttributedString.Key : Any] = [
                 .font: font,
                 .paragraphStyle: createParagraphStyle(),
             ]
+            if let color = self.color {
+                attributes[.foregroundColor] = color
+            }
             let nsText = (text ?? "") as NSString
             let textBounds = createTextBounds(
                 nsText,

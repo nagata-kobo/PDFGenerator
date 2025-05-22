@@ -34,6 +34,7 @@ extension PDF {
         func add(
             _ content: PDF.Container,
             borders: PDF.Container.Borders = [],
+            backgroundColor: UIColor? = nil,
             fromEnd: Bool = false
         ) {
             content.parent = self
@@ -55,7 +56,8 @@ extension PDF {
             let layout = Layout(
                 container: content,
                 anchors: anchors,
-                borders: borders
+                borders: borders,
+                backgroundColor: backgroundColor
             )
             contentLayouts.append(layout)
         }
@@ -63,13 +65,15 @@ extension PDF {
         public
         func fill(
             _ content: PDF.Container,
-            borders: PDF.Container.Borders = []
+            borders: PDF.Container.Borders = [],
+            backgroundColor: UIColor? = nil,
         ) {
             content.parent = self
             let layout = Layout(
                 container: content,
                 anchors: [.top, .bottom, .leading, .trailing],
-                borders: borders
+                borders: borders,
+                backgroundColor: backgroundColor
             )
             contentLayouts.append(layout)
         }
@@ -87,6 +91,10 @@ extension PDF {
                 if layout.borders == .all {
                     guard let bounds = content.bounds else {continue}
                     context.stroke(bounds)
+                }
+                if let backgroundColor = layout.backgroundColor {
+                    backgroundColor.setFill()
+                    context.fill(contentBounds)
                 }
                 environment.push(content)
                 content.draw(into: context, in: environment)

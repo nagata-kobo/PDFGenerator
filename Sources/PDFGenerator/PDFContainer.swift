@@ -152,6 +152,7 @@ extension PDF.Container {
         let container: PDF.Container
         var anchors: Anchors = []
         var borders: Borders = []
+        var backgroundColor: UIColor?
         
         init(
             container: PDF.Container,
@@ -160,11 +161,13 @@ extension PDF.Container {
                 .leading,
                 .trailing,
             ],
-            borders: Borders = []
+            borders: Borders = [],
+            backgroundColor: UIColor? = nil
         ) {
             self.container = container
             self.anchors = anchors
             self.borders = borders
+            self.backgroundColor = backgroundColor
         }
     }
 }

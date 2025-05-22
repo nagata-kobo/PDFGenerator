@@ -23,6 +23,8 @@ extension PDF {
         
         public var font: UIFont?
         
+        public var attributedText: NSAttributedString?
+        
         public var alignment: NSTextAlignment?
         
         public var verticalAlignment: VerticalAlignment = .middle
@@ -35,6 +37,14 @@ extension PDF {
             super.init(size: size)
         }
         
+        public init(
+            attributedText: NSAttributedString,
+            size: PDF.Dimension.Size = .zero
+        ) {
+            self.attributedText = attributedText
+            super.init(size: size)
+        }
+
         public init(
             _ text: String,
             font: UIFont,
@@ -56,6 +66,14 @@ extension PDF {
             fixContentBounds(in: environment)
             guard let contentBounds else {return}
             //print("***T", text, contentBounds)
+            if let attributedText = self.attributedText {
+                let textBounds = createTextBounds(
+                    attributedText: attributedText,
+                    in: contentBounds
+                )
+                attributedText.draw(in: textBounds)
+                return
+            }
             let font = self.font ?? UIFont.systemFont(ofSize: 150)
             let attributes: [NSAttributedString.Key : Any] = [
                 .font: font,
@@ -90,6 +108,79 @@ extension PDF {
         ) -> CGRect {
             let size = nsText.size(withAttributes: attributes)
             print("textSize of \(nsText):", size)
+            if size.height >= contentBounds.height {
+                return contentBounds
+            } else {
+                let dHeight = contentBounds.height - size.height
+                switch verticalAlignment {
+                case .top:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                case .middle:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y + dHeight / 2,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                case .bottom:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y + dHeight,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                }
+            }
+        }
+
+        private func createTextBounds(
+            attributedText: NSAttributedString,
+            in contentBounds: CGRect
+        ) -> CGRect {
+            let size = attributedText.size()
+            print("textSize of attributedText:", size)
+            return createTextBounds(textSize: size, in: contentBounds)
+            /*
+            if size.height >= contentBounds.height {
+                return contentBounds
+            } else {
+                let dHeight = contentBounds.height - size.height
+                switch verticalAlignment {
+                case .top:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                case .middle:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y + dHeight / 2,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                case .bottom:
+                    return CGRect(
+                        x: contentBounds.origin.x,
+                        y: contentBounds.origin.y + dHeight,
+                        width: contentBounds.size.width,
+                        height: size.height
+                    )
+                }
+            }
+             */
+        }
+        
+        private func createTextBounds(
+            textSize size: CGSize,
+            in contentBounds: CGRect
+        ) -> CGRect {
             if size.height >= contentBounds.height {
                 return contentBounds
             } else {

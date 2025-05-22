@@ -88,13 +88,16 @@ extension PDF {
             print("***S", contentBounds)
             for layout in contentLayouts {
                 let content = layout.container
-                if layout.borders == .all {
-                    guard let bounds = content.bounds else {continue}
-                    context.stroke(bounds)
-                }
                 if let backgroundColor = layout.backgroundColor {
                     backgroundColor.setFill()
-                    context.fill(contentBounds)
+                    if let bounds = content.bounds {
+                        context.fill(bounds)
+                    }
+                }
+                if layout.borders == .all {
+                    if let bounds = content.bounds {
+                        context.stroke(bounds)
+                    }
                 }
                 environment.push(content)
                 content.draw(into: context, in: environment)
